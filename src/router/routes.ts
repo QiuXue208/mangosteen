@@ -1,6 +1,5 @@
 
 import type { RouteRecordRaw } from 'vue-router'
-import { Home } from '../views/home/index'
 import { Login } from '../views/login/index'
 import { Welcome } from '../views/welcome'
 import { First } from '../views/welcome/components/First'
@@ -11,7 +10,7 @@ import { Third } from '../views/welcome/components/Third'
 const appPage: RouteRecordRaw[] = [
   {
     path: '/',
-    component: Home,
+    redirect: '/welcome/first'
   },
   {
     path: '/login',
