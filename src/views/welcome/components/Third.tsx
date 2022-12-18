@@ -1,19 +1,10 @@
-import s from './Layout.module.scss'
+import s from './index.module.scss'
 import chart from '../../../assets/icons/chart.svg'
-import { RouterLink } from "vue-router"
-import { Layout } from './Layout'
 export const Third = {
   render: () => {
-    return <Layout>
-      {{
-        icon: () =>  <img class={s.icon} src={chart} alt="" />,
-        title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
-        buttons: () => <>
-          <RouterLink class={s.fake} to='/start'>跳过</RouterLink>
-          <RouterLink to='/welcome/fourth'>下一页</RouterLink>
-          <RouterLink to='/start'>跳过</RouterLink>
-        </>
-      }}
-    </Layout>
+    return <div class={s.card}>
+      <img class={s.icon} src={chart} alt="" />
+      <h2>数据可视化<br />一目了然收支</h2>
+    </div>
   }
 }

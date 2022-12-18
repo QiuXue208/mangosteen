@@ -1,5 +1,6 @@
 .wrapper {
   height: calc(100vh - var(--welcome-nav-height));
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(to bottom, var(--welcome-bg-start) 0%, var(--welcome-bg-end) 100%);
@@ -20,5 +21,40 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+
+  }
+
+  > footer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    flex-shrink: 0;
+    height: var(--welcome-nav-height);
+    color: var(--welcome-text);
+    font-size: 24px;
+  }
+
+  /*
+  进入和离开动画可以使用不同
+  持续时间和速度曲线。
+  */
+  .slide_fade_enter_active {
+    height: 100%;
+    transition: all 0.3s ease-out;
+  }
+
+  .slide_fade_leave_active {
+    display: none;
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+
+  .slide_fade_enter_from {
+    transform: translateX(100vw);
+  }
+  .slide_fade_leave_to {
+    transform: translateX(-100vw);
+    opacity: 0;
   }
 }

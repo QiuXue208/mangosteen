@@ -3,9 +3,13 @@ import type { RouteRecordRaw } from 'vue-router'
 import { Login } from '../views/login/index'
 import { Welcome } from '../views/welcome'
 import { First } from '../views/welcome/components/First'
+import { FirstAction } from '../views/welcome/components/FirstAction'
 import { Fourth } from '../views/welcome/components/Fourth'
+import { FourthAction } from '../views/welcome/components/FourthAction'
 import { Second } from '../views/welcome/components/Second'
+import { SecondAction } from '../views/welcome/components/SecondAction'
 import { Third } from '../views/welcome/components/Third'
+import { ThirdAction } from '../views/welcome/components/ThirdAction'
 
 const appPage: RouteRecordRaw[] = [
   {
@@ -23,19 +27,19 @@ const appPage: RouteRecordRaw[] = [
     children: [
       {
         path: 'first',
-        component: First
+        components: { main: First, footer: FirstAction}
       },
       {
         path: 'second',
-        component: Second
+        components: { footer: SecondAction, main: Second }
       },
       {
         path: 'third',
-        component: Third
+        components: { footer: ThirdAction, main: Third }
       },
       {
         path: 'fourth',
-        component: Fourth
+        components: { footer: FourthAction, main: Fourth }
       }
     ]
   }
