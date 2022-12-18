@@ -1,5 +1,4 @@
 import s from './index.module.scss'
-import chart from '../../../assets/icons/chart.svg'
 export const Third = {
   render: () => {
     return <div class={s.card}>

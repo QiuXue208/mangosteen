@@ -1,5 +1,4 @@
 import s from './index.module.scss'
-import chart from '../../../assets/icons/chart.svg'
 export const Fourth = () => <div class={s.card}>
   <svg><use xlinkHref="#cloud" /></svg>
   {/* <img class={s.icon} src={chart} alt="" /> */}

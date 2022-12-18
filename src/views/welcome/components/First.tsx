@@ -1,6 +1,5 @@
 import { defineComponent } from "vue"
 import s from './index.module.scss'
-import pig from '../../../assets/icons/pig.svg'
 export const First = defineComponent({
   setup() {
     return () => <div class={s.card}>
