@@ -11,6 +11,9 @@
   --button-font-size: 15px;
   --button-height: 48px;
 
+  --z-index-overlay: 16;
+
+
   --float-button-text: #fff;
   --float-button-bg: var(--button-bg-color);
   --float-button-width: 56px;
@@ -18,4 +21,10 @@
   --float-button-radius: 50%;
 
   --navbar-text: #fff;
+
+  --top-safe-area-height: 24px;
+  --overlay-mask-bg: rgba(0, 0, 0, 0.5);
+  --overlay-bg-color: #fff;
+  --overlay-user-bg: #5c33be;
+  --overlay-user-text: #fff;
 }
