@@ -7,13 +7,16 @@ interface Props {
 export const Icon = defineComponent({
  props: {
   name: {
-    type: String,
+    type: String as PropType<string>,
     default: 'add',
     required: false
+  },
+  onClick: {
+    type: Function as PropType<(e: Event) => void>
   }
  },
  setup(props){
-   return () => (<svg class={s.icon}>
+   return () => (<svg class={s.icon} onClick={props.onClick}>
     <use xlinkHref={`#${props.name}`} />
    </svg>)
  }
