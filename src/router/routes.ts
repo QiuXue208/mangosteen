@@ -27,18 +27,22 @@ const appPage: RouteRecordRaw[] = [
     children: [
       {
         path: 'first',
+        name: 'first',
         components: { main: First, footer: FirstAction}
       },
       {
         path: 'second',
+        name: 'second',
         components: { footer: SecondAction, main: Second }
       },
       {
         path: 'third',
+        name: 'third',
         components: { footer: ThirdAction, main: Third }
       },
       {
         path: 'fourth',
+        name: 'fourth',
         components: { footer: FourthAction, main: Fourth }
       }
     ]
