@@ -1,0 +1,13 @@
+.wrapper {
+  padding: 16px;
+  .button {
+    width: 100%;
+    background-color: var(--button-bg-color);
+    color: var(--button-color);
+    font-size: var(--button-font-size);
+    border-radius: var(--button-radius);
+    border: 1px solid var(--button-bg-color);
+    height: var(--button-height);
+    padding: 0 12px;
+  }
+}
