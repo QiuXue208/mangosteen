@@ -1,0 +1,33 @@
+.tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--tabs-bg-color);
+  overflow-x: scroll;
+  &_wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+  .tab {
+    flex-grow: 1;
+    flex-shrink: 0;
+    text-align: center;
+    padding: 12px 0;
+    color: var(--tabs-text);
+    &.active {
+      position: relative;
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--tabs-indicator-bg);
+      }
+    }
+  }
+}

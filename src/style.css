@@ -45,6 +45,10 @@ button, input {
   font: inherit;
 }
 
+ul, ol {
+  list-style: none;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
