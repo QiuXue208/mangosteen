@@ -6,8 +6,14 @@ export const Tabs = defineComponent({
     activeKey: {
       type: String as PropType<string | null>,
     },
+    tabClass: {
+      type: String
+    },
+    contentClass: {
+      type: String
+    }
   },
-  setup(props, { slots, emit }){
+  setup(props, { slots, emit, attrs }){
     return () => {
       const tabs = slots.default?.()
       if (!tabs) return null
@@ -17,14 +23,14 @@ export const Tabs = defineComponent({
         }
       }
       return (<div class={s.tabs_wrapper}>
-        <ol class={s.tabs}>
+        <ol class={[s.tabs, props.tabClass]}>
           {tabs.map(item => (<li
             class={[s.tab, props.activeKey === item.props?.key ? s.active : '']}
             onClick={() => emit('update:activeKey', item.props?.key)}>
             {item.props?.title}
           </li>))}
         </ol>
-        <div class={s.content}>
+        <div class={[s.content, props.contentClass]}>
           {tabs.find(tab => tab.props?.key === props.activeKey)?.children?.default?.()}
         </div>
       </div>)

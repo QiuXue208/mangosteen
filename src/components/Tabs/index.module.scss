@@ -3,7 +3,6 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  background: var(--tabs-bg-color);
   overflow-x: scroll;
   &_wrapper {
     width: 100%;
@@ -14,7 +13,6 @@
     flex-shrink: 0;
     text-align: center;
     padding: 12px 0;
-    color: var(--tabs-text);
     &.active {
       position: relative;
       &::after {
@@ -29,5 +27,8 @@
         background: var(--tabs-indicator-bg);
       }
     }
+  }
+  .content {
+    background-color: var(--tabs-content-bg);
   }
 }
