@@ -1,0 +1,14 @@
+
+.tips {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  .button {
+    width: calc(50% - 8px);
+  }
+}

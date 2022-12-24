@@ -2,7 +2,7 @@ export const categoryMap = [
   {
     key: 'entertainment',
     title: '娱乐',
-    tags: ["badminton", "mahjiang", "pingpang", "poker", "sing", "skating", "ski", "swim"]
+    tags: ["badminton", "mahjiang", "pingpang", "poker", "sing", "skating", "ski", "swim", "badminton", "mahjiang", "pingpang", "poker", "sing", "skating", "ski", "swim"]
   },
   {
     key: 'diet',
