@@ -3,6 +3,7 @@ import { Icon } from "../../components/Icon"
 import { MainLayout } from "../../components/Layout/MainLayout"
 import { Tabs, Tab } from "../../components/Tabs"
 import { Keyboard } from "./components/Keyboard"
+import s from './create.module.scss'
 
 export const Create = defineComponent({
   setup(){
@@ -13,7 +14,7 @@ export const Create = defineComponent({
         title: () => '记一笔',
         icon: () => <Icon name='arrow-left' />,
         default: () => <>
-          <Tabs v-model:activeKey={activeKey.value}>
+          <Tabs v-model:activeKey={activeKey.value} tabClass={s.tabs}>
             <Tab key='expend' title='支出'>
               <main>内容1</main>
             </Tab>

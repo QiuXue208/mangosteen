@@ -22,7 +22,7 @@ export const Start = defineComponent({
           <Icon name='pig' class={s.pig} />
         </Center>
         <RouterLink to='/item/create'>
-          <Button>开始记账</Button>
+          <Button class={s.button}>开始记账</Button>
         </RouterLink>
         <RouterLink to='/item/create'>
           <FloatButton />
