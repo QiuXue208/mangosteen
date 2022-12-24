@@ -1,5 +1,7 @@
-import { defineComponent, PropType, watch } from "vue"
+import { defineComponent, isVNode, PropType, RendererElement, RendererNode, VNode, VNodeTypes } from "vue"
 import s from './index.module.scss'
+
+type Tabs = VNode<RendererNode, RendererElement, { [key: string]: any; }>[]
 
 export const Tabs = defineComponent({
   props: {
@@ -14,24 +16,41 @@ export const Tabs = defineComponent({
     }
   },
   setup(props, { slots, emit, attrs }){
+
+    const handleTabs = (tabs: Tabs) => {
+      if (!tabs) return []
+      let handledTabs: Tabs  = []
+      const isTab = (compType: VNodeTypes) => {
+        if (compType !== Tab) throw new Error('<Tabs> only accept <Tab> as children')
+      }
+      for (let i = 0; i < tabs.length; i++) {
+        const childTabs = tabs[i].children as Tabs || []
+        if (childTabs?.length) {
+          childTabs?.forEach(tab => isTab(tab.type))
+          handledTabs = handledTabs.concat(childTabs)
+        } else {
+          isTab(tabs[i].type)
+          handledTabs.push(tabs[i])
+        }
+      }
+      return handledTabs
+    }
+
     return () => {
       const tabs = slots.default?.()
       if (!tabs) return null
-      for (let i = 0; i < tabs.length; i++) {
-        if (tabs[i].type !== Tab) {
-          throw new Error('<Tabs> only accept <Tab> as children')
-        }
-      }
+      const handledTabs = handleTabs(tabs)
+
       return (<div class={s.tabs_wrapper}>
         <ol class={[s.tabs, props.tabClass]}>
-          {tabs.map(item => (<li
+          {handledTabs.map(item => (<li
             class={[s.tab, props.activeKey === item.props?.key ? s.active : '']}
             onClick={() => emit('update:activeKey', item.props?.key)}>
             {item.props?.title}
           </li>))}
         </ol>
         <div class={[s.content, props.contentClass]}>
-          {tabs.find(tab => tab.props?.key === props.activeKey)?.children?.default?.()}
+          {handledTabs.find(tab => tab.props?.key === props.activeKey)?.children?.default?.()}
         </div>
       </div>)
     }

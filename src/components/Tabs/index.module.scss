@@ -4,6 +4,9 @@
   justify-content: space-between;
   align-items: center;
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   &_wrapper {
     width: 100%;
     overflow: hidden;
@@ -12,7 +15,7 @@
     flex-grow: 1;
     flex-shrink: 0;
     text-align: center;
-    padding: 12px 0;
+    padding: 12px 8px;
     &.active {
       position: relative;
       &::after {
