@@ -8,12 +8,9 @@ export const Tabs = defineComponent({
     activeKey: {
       type: String as PropType<string | null>,
     },
-    tabClass: {
-      type: String
-    },
-    contentClass: {
-      type: String
-    }
+    tabClass: String,
+    tabActiveCalss: String,
+    contentClass: String
   },
   setup(props, { slots, emit, attrs }){
 
@@ -42,9 +39,9 @@ export const Tabs = defineComponent({
       const handledTabs = handleTabs(tabs)
 
       return (<div class={s.tabs_wrapper}>
-        <ol class={[s.tabs, props.tabClass]}>
+        <ol class={s.tabs}>
           {handledTabs.map(item => (<li
-            class={[s.tab, props.activeKey === item.props?.key ? s.active : '']}
+            class={[s.tab, props.activeKey === item.props?.key ? [s.active, props.tabActiveCalss] : '', props.tabClass]}
             onClick={() => emit('update:activeKey', item.props?.key)}>
             {item.props?.title}
           </li>))}
