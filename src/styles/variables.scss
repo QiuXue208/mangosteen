@@ -1,5 +1,8 @@
 :root {
+  --font-family-medium: PingFangSC-Medium, sans-serif;
   --primary: #5c33be;
+  --error-color: #E10505;
+
   --welcome-card-bg: #fff;
   --welcome-text: #fff;
   --welcome-nav-height: 64px;
@@ -11,6 +14,10 @@
   --button-radius: 8px;
   --button-font-size: 15px;
   --button-height: 48px;
+  --button-bg-danger: #E10505;
+  --button-bg-success: #00b578;
+  --button-bg-warning: #ff8f1f;
+  --button-bg-primary: var(--primary);
 
   --z-index-overlay: 16;
 
@@ -38,4 +45,12 @@
 
   --input-number-button-bg: #fff;
   --input-number-button-border-color: #f9f9f9;
+
+  --tag-bg-color: rgba(230, 230, 230, 0.5);
+  --category-tabs-text: #938a8a;
+  --category-tabs-text-active: #000;
+
+  --input-shadow: rgba(0,0,0,0.25);
+  --input-border-color: #5c33be;
+  --input-min-height: 48px;
 }
