@@ -4,6 +4,7 @@ import { Home } from '../views/items'
 import { Create } from '../views/items/create'
 import { Login } from '../views/login/index'
 import { Start } from '../views/start'
+import { CreateOrEdit } from '../views/tag/CreateOrEdit'
 import { Welcome } from '../views/welcome'
 import { First } from '../views/welcome/components/First'
 import { FirstAction } from '../views/welcome/components/FirstAction'
@@ -64,6 +65,19 @@ const appPage: RouteRecordRaw[] = [
       {
         path: 'create',
         component: Create
+      }
+    ]
+  },
+  {
+    path: '/tag',
+    children: [
+      {
+        path: 'create',
+        component: CreateOrEdit
+      },
+      {
+        path: 'edit/:id',
+        component: CreateOrEdit
       }
     ]
   }
