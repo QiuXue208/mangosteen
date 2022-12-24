@@ -2,12 +2,30 @@
   // padding: 16px 0;
   .button {
     width: 100%;
-    background-color: var(--button-bg-color);
     color: var(--button-color);
     font-size: var(--button-font-size);
     border-radius: var(--button-radius);
-    border: 1px solid var(--button-bg-color);
     height: var(--button-height);
     padding: 0 12px;
+    &.default {
+      border: 1px solid var(--button-bg-primary);
+      background-color: var(--button-bg-primary);
+    }
+    &.success {
+      background-color: var(--button-bg-success);
+      border: 1px solid var(--button-bg-success);
+    }
+    &.warning {
+      background-color: var(--button-bg-warning);
+      border: 1px solid var(--button-bg-warning);
+    }
+    &.primary {
+      background-color: var(--button-bg-primary);
+      border: 1px solid var(--button-bg-primary);
+    }
+    &.danger {
+      background-color: var(--button-bg-danger);
+      border: 1px solid var(--button-bg-danger);
+    }
   }
 }
