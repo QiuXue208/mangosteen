@@ -1,7 +1,7 @@
 import { defineComponent, onMounted, PropType, ref } from "vue"
 import { Icon } from "../../../components/Icon"
 import { Tabs, Tab } from "../../../components/Tabs"
-import { categoryMap, CategoryItem } from "../constants"
+import { categoryMap, CategoryItem } from "../../../utils/constants"
 import s from './Category.module.scss'
 
 export const Category = defineComponent({

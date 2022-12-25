@@ -1,3 +1,44 @@
-.tabs {
+.tab {
   background: var(--tabs-bg-color);
+  color: var(--tabs-text);
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  .tag {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: calc(20vw * 1.14);
+    &.selected {
+      .icon_wrapper {
+        border: 1px solid var(--primary);
+      }
+    }
+    .icon_wrapper {
+      width: 12vw;
+      height: 12vw;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-bg);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        fill: #8a8a8a;
+      }
+      .createIcon {
+        fill: var(--primary);
+        font-size: 20px;
+      }
+    }
+    .name {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
 }
