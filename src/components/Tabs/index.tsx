@@ -42,7 +42,10 @@ export const Tabs = defineComponent({
         <ol class={s.tabs}>
           {handledTabs.map(item => (<li
             class={[s.tab, props.activeKey === item.props?.key ? [s.active, props.tabActiveCalss] : '', props.tabClass]}
-            onClick={() => emit('update:activeKey', item.props?.key)}>
+            onClick={(e) => {
+              e.stopPropagation()
+              emit('update:activeKey', item.props?.key)
+            }}>
             {item.props?.title}
           </li>))}
         </ol>
