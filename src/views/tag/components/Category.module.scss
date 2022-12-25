@@ -9,6 +9,9 @@
     background-color: var(--tag-bg-color);
     padding: 8px;
     margin: 0 16px 16px;
+    &.active {
+      background-color: var(--primary);
+    }
   }
 }
 

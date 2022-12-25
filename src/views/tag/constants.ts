@@ -1,4 +1,11 @@
-export const categoryMap = [
+type CategoryItem = {
+  key: string
+  title: string
+  tags: string[]
+}
+export type { CategoryItem }
+
+export const categoryMap: CategoryItem[] = [
   {
     key: 'entertainment',
     title: '娱乐',
