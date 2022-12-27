@@ -22,7 +22,6 @@ export const CustomDate = defineComponent({
 
     return () => (<Overlay
       show={props.visible}
-      onClick={() => emit('update:visible', false)}
     >
       <div class={s.wrapper}>
         <div class={s.content}>

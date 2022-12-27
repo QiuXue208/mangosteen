@@ -1,0 +1,13 @@
+.tab {
+  background-color: var(--tabs-bg-end);
+  color: var(--tabs-text);
+}
+
+.content {
+  padding: 16px;
+  height: calc(100vh - var(--tabs-height) - var(--navbar-height));
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
