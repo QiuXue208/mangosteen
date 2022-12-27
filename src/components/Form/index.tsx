@@ -1,5 +1,6 @@
 import { Component, defineComponent, PropType, ref } from "vue"
 import { Category } from "../../views/tag/components/Category"
+import { Button } from "../Button"
 import s from './index.module.scss'
 
 export const Form = defineComponent({
@@ -23,10 +24,10 @@ export const Form = defineComponent({
 export const FormItem = defineComponent({
   props: {
     label: {
-      type: Object as PropType<string | Component>
+      type: String as PropType<string | Component>
     },
     type: {
-      type: String as PropType<'text' | 'category' | 'email' | 'code'>
+      type: String as PropType<'text' | 'category' | 'email' | 'validationCode'>
     },
     placeholder: String,
     error: String,
@@ -53,6 +54,16 @@ export const FormItem = defineComponent({
             onUpdateCategory={(val) => emit('update:modelValue', val)}
             class={[s.content, s.categoryList]}
           />
+        case 'validationCode':
+          return <div class={[s.content, s.validationCode]}>
+            <input
+              class={s.input}
+              onInput={(e: any) => emit("update:modelValue", e.target?.value)}
+              value={props.modelValue}
+              placeholder={props.placeholder}
+            />
+            <Button class={s.button} color='primary'>发送验证码</Button>
+          </div>
         default:
           return slots.default?.()
       }
