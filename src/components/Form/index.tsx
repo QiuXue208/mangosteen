@@ -1,7 +1,9 @@
 import { Component, defineComponent, PropType, ref } from "vue"
 import { Category } from "../../views/tag/components/Category"
 import { Button } from "../Button"
+import { DatePicker } from "../DatePicker"
 import s from './index.module.scss'
+import dayjs from 'dayjs'
 
 export const Form = defineComponent({
   props: {
@@ -27,7 +29,7 @@ export const FormItem = defineComponent({
       type: String as PropType<string | Component>
     },
     type: {
-      type: String as PropType<'text' | 'category' | 'email' | 'validationCode'>
+      type: String as PropType<'text' | 'category' | 'email' | 'validationCode' | 'date'>
     },
     placeholder: String,
     error: String,
@@ -35,9 +37,12 @@ export const FormItem = defineComponent({
       type: Boolean,
       default: false
     },
-    modelValue: String
+    modelValue: String,
+    dateTitle: String,
   },
   setup(props, { slots, emit }){
+    const refDateVisible = ref(false)
+
     const renderContent = () => {
       switch(props.type) {
         case 'text':
@@ -64,6 +69,24 @@ export const FormItem = defineComponent({
             />
             <Button class={s.button} color='primary'>发送验证码</Button>
           </div>
+        case 'date':
+          return <>
+            <input
+              readonly={true}
+              value={props.modelValue && dayjs(parseInt(props.modelValue)).format('YYYY-MM-DD')}
+              placeholder={props.placeholder}
+              onClick={() => { refDateVisible.value = true }}
+              class={[s.content, s.input]} />
+            <DatePicker
+              visible={refDateVisible.value}
+              title={props.dateTitle}
+              onConfirm={(date: Date) => {
+                emit('update:modelValue', dayjs(date).valueOf().toString())
+                refDateVisible.value = false
+              }}
+              onCancel={() => refDateVisible.value = false}
+            />
+          </>
         default:
           return slots.default?.()
       }
