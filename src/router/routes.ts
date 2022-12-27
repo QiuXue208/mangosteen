@@ -1,6 +1,6 @@
 
 import type { RouteRecordRaw } from 'vue-router'
-import { Home } from '../views/items'
+import { ItemsList } from '../views/items'
 import { Create } from '../views/items/create'
 import { Login } from '../views/login/index'
 import { Start } from '../views/start'
@@ -60,8 +60,8 @@ const appPage: RouteRecordRaw[] = [
     path: '/item',
     children: [
       {
-        path: '',
-        component: Home
+        path: 'index',
+        component: ItemsList
       },
       {
         path: 'create',
