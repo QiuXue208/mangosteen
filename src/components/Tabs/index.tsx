@@ -12,6 +12,7 @@ export const Tabs = defineComponent({
     tabActiveCalss: String,
     contentClass: String
   },
+  emits: ['update:activeKey'],
   setup(props, { slots, emit, attrs }){
 
     const handleTabs = (tabs: Tabs) => {
