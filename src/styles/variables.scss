@@ -2,6 +2,10 @@
   --font-family-medium: PingFangSC-Medium, sans-serif;
   --primary: #5c33be;
   --error-color: #E10505;
+  --amount-text: #53a867;
+  --date-text: #999999;
+  --tag-color: #8a8a8a;
+  --tag-size: 18px;
 
   --welcome-card-bg: #fff;
   --welcome-text: #fff;
@@ -18,6 +22,7 @@
   --button-bg-success: #00b578;
   --button-bg-warning: #ff8f1f;
   --button-bg-primary: var(--primary);
+  --button-border-color: #ddd;
 
   --z-index-overlay: 16;
 
@@ -65,4 +70,13 @@
   --text-muted: #666;
 
   --custom-date-bg: #fff;
+
+  --total-bg: #252A43;
+  --total-expenses: #53A867;
+  --total-income: #FE7275;
+  --total-text: white;
+
+  --list-amount-text: var(--amount-text);
+  --list-tag-text: #333;
+  --list-time-text: var(--date-text);
 }
