@@ -1,9 +1,33 @@
-import { defineComponent } from "vue"
+import { defineComponent, ref } from "vue"
+import { DatePicker } from "../../../components/DatePicker"
 import { Icon } from "../../../components/Icon"
+import dayjs from 'dayjs'
 import s from './Keyboard.module.scss'
+
+const defaultFormatter = 'YYYY-MM-DD'
 
 export const Keyboard = defineComponent({
   setup(){
+    const dateVisible = ref<boolean>(false)
+    const handleSelectDate = () => {
+      dateVisible.value = true
+    }
+    const date = ref<Date>(new Date())
+
+    const handleCancel = () => {
+      dateVisible.value = false
+    }
+
+    const handleConfirm = (val: Date) => {
+      date.value = val
+      handleCancel()
+    }
+
+    const fetchFormatTime = (time: Date, formatter = defaultFormatter) =>{
+      if (!time) return
+      return dayjs(time).format(formatter)
+    }
+
     return () => (<div class={s.keyboard}>
       <div class={s.keyboard_top}>
         <span class={s.date_wrapper}>
@@ -29,14 +53,26 @@ export const Keyboard = defineComponent({
           </div>
         </div>
         <div class={s.right}>
-          <button>
-            <Icon name='date' />
-            <span>今天</span>
+          <button onClick={handleSelectDate}>
+            {
+              fetchFormatTime(date.value) === fetchFormatTime(new Date()) ? <>
+                <Icon name='date' />
+                <span>今天</span>
+              </> : <span>{fetchFormatTime(date.value)}</span>
+            }
+            
           </button>
           <button>清空</button>
           <button>完成</button>
         </div>
       </div>
+      <DatePicker
+        visible={dateVisible.value}
+        value={date.value}
+        onCancel={handleCancel}
+        title='选择日期'
+        onConfirm={handleConfirm}
+      />
     </div>)
   }
 })
