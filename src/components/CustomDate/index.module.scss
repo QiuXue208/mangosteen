@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .content {
+    background-color: var(--custom-date-bg);
+    border-radius: 12px;
+  }
+}
