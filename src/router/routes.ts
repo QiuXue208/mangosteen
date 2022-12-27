@@ -4,6 +4,7 @@ import { Home } from '../views/items'
 import { Create } from '../views/items/create'
 import { Login } from '../views/login/index'
 import { Start } from '../views/start'
+import { Statistic } from '../views/statistic'
 import { CreateOrEdit } from '../views/tag/CreateOrEdit'
 import { Welcome } from '../views/welcome'
 import { First } from '../views/welcome/components/First'
@@ -80,6 +81,10 @@ const appPage: RouteRecordRaw[] = [
         component: CreateOrEdit
       }
     ]
+  },
+  {
+    path: '/statistic',
+    component: Statistic
   }
 ]
 
