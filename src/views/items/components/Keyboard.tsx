@@ -13,6 +13,7 @@ export const Keyboard = defineComponent({
       dateVisible.value = true
     }
     const date = ref<Date>(new Date())
+    const amount = ref<string>('0')
 
     const handleCancel = () => {
       dateVisible.value = false
@@ -28,6 +29,42 @@ export const Keyboard = defineComponent({
       return dayjs(time).format(formatter)
     }
 
+    const handleNumber = (val: string | number) => {
+      switch(val) {
+        case 'clear':
+          amount.value = '0'
+          break
+        case 'delete':
+          if (amount.value.length === 1) amount.value = '0'
+          else amount.value = amount.value.slice(0, amount.value.length - 1)
+          break
+        case '.':
+          if (amount.value.indexOf('.') !== -1) return
+          amount.value += val
+          break
+        case 0:
+          if (amount.value === '0') return
+          // 0.0之后不允许再输入0
+          if (amount.value === '0.0') return
+          // 保留小数点后两位
+          if (amount.value.split('.')?.[1].length >= 2) return
+          amount.value += val
+          break
+        default:
+          const splitAmount = amount.value.split('.')
+          const interger = splitAmount[0]
+          const decimals = splitAmount[1]
+          if (decimals?.length >= 2) return
+          if (interger?.length >= 8 && amount.value.indexOf('.') === -1) return
+          if (amount.value === '0') {
+            amount.value = val.toString()
+          } else {
+            amount.value += val
+          }
+          break
+      }
+    }
+
     return () => (<div class={s.keyboard}>
       <div class={s.keyboard_top}>
         <span class={s.date_wrapper}>
@@ -37,19 +74,21 @@ export const Keyboard = defineComponent({
           </div>
           <input class={s.input} placeholder="点击写备注..." />
         </span>
-        <span class={s.amount}>999.99</span>
+        <span class={s.amount}>{amount.value}</span>
       </div>
       <div class={s.keyboard_bottom}>
         <div class={s.left}>
           <div class={s.left_top}>
           {Array.from({ length: 9 }, (_, index) => index + 1).map(item => (
-            <button key={item}>{item}</button>
+            <button onClick={() => handleNumber(item)}>{item}</button>
           ))}
           </div>
           <div class={s.left_bottom}>
-            <button>.</button>
-            <button>0</button>
-            <button><Icon name='delete' /></button>
+            <button onClick={() => handleNumber('.')}>.</button>
+            <button onClick={() => handleNumber(0)}>0</button>
+            <button onClick={() => handleNumber('delete')}>
+              <Icon name='delete' />
+            </button>
           </div>
         </div>
         <div class={s.right}>
@@ -60,9 +99,8 @@ export const Keyboard = defineComponent({
                 <span>今天</span>
               </> : <span>{fetchFormatTime(date.value)}</span>
             }
-            
           </button>
-          <button>清空</button>
+          <button onClick={() => handleNumber('clear')}>清空</button>
           <button>完成</button>
         </div>
       </div>
