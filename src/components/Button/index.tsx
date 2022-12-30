@@ -17,11 +17,17 @@ export const Button = defineComponent({
     type: {
       type: String as PropType<'button' | 'submit' | 'reset'>,
       default: 'button'
-    }
+    },
+    disabled: Boolean
   },
   setup(props, { slots }){
     return () => (<div class={s.wrapper} onClick={props.onClick}>
-      <button type={props.type} class={[s.button, s[props.color]]}>{slots?.default?.()}</button>
+      <button
+        disabled={props.disabled}
+        type={props.type}
+        class={[s.button, s[props.color]]}>
+        {slots?.default?.()}
+      </button>
     </div>)
   }
 })
