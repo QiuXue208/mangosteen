@@ -4,6 +4,7 @@ import { Button } from "../Button"
 import { DatePicker } from "../DatePicker"
 import s from './index.module.scss'
 import dayjs from 'dayjs'
+import { useCountDown } from "./useCountDown"
 
 export const Form = defineComponent({
   props: {
@@ -39,10 +40,19 @@ export const FormItem = defineComponent({
     },
     modelValue: String,
     dateTitle: String,
-    onClick: Function as PropType<() => void>
+    onClick: Function as PropType<() => void>,
+    countFrom: {
+      type: Number,
+      default: 3
+    },
   },
   setup(props, { slots, emit }){
     const refDateVisible = ref(false)
+    const {
+      isCounting,
+      handler: onSendCode,
+      count
+    } = useCountDown({ onClick: props.onClick, countFrom: 3 })
 
     const renderContent = () => {
       switch(props.type) {
@@ -68,7 +78,14 @@ export const FormItem = defineComponent({
               value={props.modelValue}
               placeholder={props.placeholder}
             />
-            <Button class={s.button} color='primary' onClick={props.onClick}>发送验证码</Button>
+            <Button
+              class={s.button}
+              color='primary'
+              onClick={onSendCode}
+              disabled={isCounting.value}
+            >
+              {isCounting.value ? `${count.value}秒后重发` : '发送验证码'}
+            </Button>
           </div>
         case 'date':
           return <>
