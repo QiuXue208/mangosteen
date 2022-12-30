@@ -6,6 +6,7 @@ import { MainLayout } from "../../components/Layout/MainLayout";
 import { formValidate } from "../../utils/formValidate";
 import type { Rules } from '../../utils/formValidate'
 import s from './index.module.scss'
+import axios from "axios";
 
 export const Login = defineComponent({
   setup() {
@@ -17,6 +18,11 @@ export const Login = defineComponent({
       { key: 'code', required: true, message: '必填' },
       { key: 'code', pattern: /[0-9]{6}/, message: '必须是6位数字' }
     ]
+
+    const handleSendeValidationCode = async() => {
+      const response = await axios.post('/api/sendValidationCode', { email: formData.email })
+      console.log(response)
+    }
 
     const hanldeSubmit = () => {
       console.log(1)
@@ -47,6 +53,7 @@ export const Login = defineComponent({
               v-model={formData.code}
               type='validationCode'
               label='验证码'
+              onClick={handleSendeValidationCode}
               error={errors.value.code?.[0]}
               placeholder="六位数字"
             />

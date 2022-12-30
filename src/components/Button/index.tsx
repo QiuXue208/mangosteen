@@ -13,11 +13,15 @@ export const Button = defineComponent({
     color: {
       type: String as PropType<'default' | 'primary' | 'success' | 'warning' | 'danger'>,
       default: 'primary'
+    },
+    type: {
+      type: String as PropType<'button' | 'submit' | 'reset'>,
+      default: 'button'
     }
   },
   setup(props, { slots }){
-    return () => (<div class={s.wrapper}>
-      <button class={[s.button, s[props.color]]}>{slots?.default?.()}</button>
+    return () => (<div class={s.wrapper} onClick={props.onClick}>
+      <button type={props.type} class={[s.button, s[props.color]]}>{slots?.default?.()}</button>
     </div>)
   }
 })

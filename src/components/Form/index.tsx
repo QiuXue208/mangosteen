@@ -39,6 +39,7 @@ export const FormItem = defineComponent({
     },
     modelValue: String,
     dateTitle: String,
+    onClick: Function as PropType<() => void>
   },
   setup(props, { slots, emit }){
     const refDateVisible = ref(false)
@@ -67,7 +68,7 @@ export const FormItem = defineComponent({
               value={props.modelValue}
               placeholder={props.placeholder}
             />
-            <Button class={s.button} color='primary'>发送验证码</Button>
+            <Button class={s.button} color='primary' onClick={props.onClick}>发送验证码</Button>
           </div>
         case 'date':
           return <>

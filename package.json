@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.0",
+    "axios": "^1.2.2",
     "dayjs": "^1.11.7",
     "echarts": "^5.4.1",
     "sass": "^1.56.2",
