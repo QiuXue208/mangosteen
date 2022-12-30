@@ -12,6 +12,7 @@ export const Login = defineComponent({
   setup() {
     const formData = reactive({ email: '', code: '' })
     const errors = ref<{[k in keyof typeof formData]?: string[]}>({})
+    const refValidationCode = ref()
     const rules: Rules<typeof formData> = [
       { key: 'email', required: true, message: '必填' },
       { key: 'email', pattern: /.+@.+/, message: '必须是邮箱地址' },
@@ -21,7 +22,11 @@ export const Login = defineComponent({
 
     const handleSendeValidationCode = async() => {
       const response = await axios.post('/api/sendValidationCode', { email: formData.email })
-      console.log(response)
+        .catch(() => {
+          // 调用失败
+        })
+      // 调用成功
+      refValidationCode.value.startCountDown()
     }
 
     const hanldeSubmit = () => {
@@ -51,6 +56,7 @@ export const Login = defineComponent({
             />
             <FormItem
               v-model={formData.code}
+              ref={refValidationCode}
               type='validationCode'
               label='验证码'
               onClick={handleSendeValidationCode}

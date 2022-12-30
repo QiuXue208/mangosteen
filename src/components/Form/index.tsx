@@ -43,16 +43,18 @@ export const FormItem = defineComponent({
     onClick: Function as PropType<() => void>,
     countFrom: {
       type: Number,
-      default: 3
+      default: 60
     },
   },
-  setup(props, { slots, emit }){
+  setup(props, { slots, emit, expose }){
     const refDateVisible = ref(false)
     const {
       isCounting,
-      handler: onSendCode,
+      startCountDown,
       count
-    } = useCountDown({ onClick: props.onClick, countFrom: 3 })
+    } = useCountDown({ countFrom: props.countFrom })
+
+    expose({ startCountDown })
 
     const renderContent = () => {
       switch(props.type) {
@@ -81,7 +83,7 @@ export const FormItem = defineComponent({
             <Button
               class={s.button}
               color='primary'
-              onClick={onSendCode}
+              onClick={props.onClick}
               disabled={isCounting.value}
             >
               {isCounting.value ? `${count.value}秒后重发` : '发送验证码'}
