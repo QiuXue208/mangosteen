@@ -45,7 +45,8 @@ export const FormItem = defineComponent({
       type: Number,
       default: 60
     },
-    onBlur: Function as PropType<() => void>
+    onBlur: Function as PropType<() => void>,
+    disabled: Boolean,
   },
   setup(props, { slots, emit, expose }){
     const refDateVisible = ref(false)
@@ -87,7 +88,7 @@ export const FormItem = defineComponent({
               class={s.button}
               color='primary'
               onClick={props.onClick}
-              disabled={isCounting.value}
+              disabled={isCounting.value || props.disabled}
             >
               {isCounting.value ? `${count.value}秒后重发` : '发送验证码'}
             </Button>

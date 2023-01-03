@@ -7,12 +7,14 @@ import { formValidate } from "../../utils/formValidate";
 import type { Rules, FData } from '../../utils/formValidate'
 import s from './index.module.scss'
 import { sendvalidationCode } from "../../service/modules/login";
+import { useBool } from "../../hooks/useBool";
 
 export const Login = defineComponent({
   setup() {
     const formData = reactive<FData>({ email: '', code: '' })
     const errors = ref<{[k in keyof typeof formData]?: string[]}>({})
     const refValidationCode = ref()
+    const { value: disableSendBtn, on, off } = useBool(false)
     const rules: Rules<typeof formData> = [
       { key: 'email', required: true, message: '邮箱地址不能为空' },
       { key: 'email', pattern: /.+@.+/, message: '邮箱地址格式不正确' },
@@ -21,14 +23,15 @@ export const Login = defineComponent({
     ]
 
     const handleSendValidationCode = async() => {
+      on()
       if (!isValid({ email: formData.email })) return
+      refValidationCode.value.startCountDown()
       await sendvalidationCode({ email: formData.email })
         .catch((error) => {
           handleError(error)
           // 调用失败
           throw error
-        })
-      refValidationCode.value.startCountDown()
+        }).finally(off)
     }
 
     const handleError = (error: any) => {
@@ -71,6 +74,7 @@ export const Login = defineComponent({
               v-model={formData.code}
               ref={refValidationCode}
               type='validationCode'
+              disabled={disableSendBtn}
               label='验证码'
               onBlur={() => isValid({ code: formData.code })}
               onClick={handleSendValidationCode}

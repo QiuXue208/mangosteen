@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from "vue"
+import { computed, defineComponent, PropType, ref } from "vue"
 import s from './index.module.scss' 
 
 interface Props {
@@ -18,12 +18,32 @@ export const Button = defineComponent({
       type: String as PropType<'button' | 'submit' | 'reset'>,
       default: 'button'
     },
-    disabled: Boolean
+    disabled: Boolean,
+    selfDisabled: {
+      type: Boolean,
+      default: false
+    },
   },
   setup(props, { slots }){
-    return () => (<div class={s.wrapper} onClick={props.onClick}>
+    const selfDisabled = ref<boolean>(false)
+
+    const disabled = computed(() => {
+      if (!props.selfDisabled) return props.disabled
+      if (selfDisabled.value) return true
+      return props.disabled
+    })
+
+    const handleClick = (e: MouseEvent) => {
+      props.onClick?.(e)
+      selfDisabled.value = true
+      setTimeout(() => {
+        selfDisabled.value = false
+      }, 1000)
+    }
+
+    return () => (<div class={s.wrapper} onClick={handleClick}>
       <button
-        disabled={props.disabled}
+        disabled={disabled.value}
         type={props.type}
         class={[s.button, s[props.color]]}>
         {slots?.default?.()}
