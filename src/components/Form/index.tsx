@@ -45,6 +45,7 @@ export const FormItem = defineComponent({
       type: Number,
       default: 60
     },
+    onBlur: Function as PropType<() => void>
   },
   setup(props, { slots, emit, expose }){
     const refDateVisible = ref(false)
@@ -63,6 +64,7 @@ export const FormItem = defineComponent({
             class={[s.content, s.input]}
             value={props.modelValue}
             onInput={(e: any) => emit("update:modelValue", e.target?.value)}
+            onBlur={props.onBlur}
             placeholder={props.placeholder}
             type='text'
           />
@@ -79,6 +81,7 @@ export const FormItem = defineComponent({
               onInput={(e: any) => emit("update:modelValue", e.target?.value)}
               value={props.modelValue}
               placeholder={props.placeholder}
+              onBlur={props.onBlur}
             />
             <Button
               class={s.button}
@@ -95,6 +98,7 @@ export const FormItem = defineComponent({
               readonly={true}
               value={props.modelValue && dayjs(parseInt(props.modelValue)).format('YYYY-MM-DD')}
               placeholder={props.placeholder}
+              onBlur={props.onBlur}
               onClick={() => { refDateVisible.value = true }}
               class={[s.content, s.input]} />
             <DatePicker

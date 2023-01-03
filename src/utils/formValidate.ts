@@ -17,18 +17,18 @@ export const formValidate = <T extends FData>(formValue: T, rules: Rules<T>) => 
   type Errors = { [key in keyof T]?: string[] }
   let errors: Errors = {}
 
-  rules.forEach((rule) => {
-    const { key, required, pattern, message } = rule
+  for (let i = 0; i < rules.length; i++) {
+    const { key, required, pattern, message } = rules[i] || {}
+    if (!Object.prototype.hasOwnProperty.call(formValue, key)) continue
     const value = formValue[key]
-
     if (required && !value) {
       errors[key] = errors[key] || []
       errors[key]?.push(message)
-    } else if (pattern && !pattern.test(value!.toString())) {
+    } else if (pattern && value && !pattern.test(value!.toString())) {
       errors[key] = errors[key] || []
       errors[key]?.push(message)
     }
-  })
+  }
 
   return errors
 }
