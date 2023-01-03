@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from "axios"
-export type JSONValue = string | number | boolean | null | JSONValue[] | { [k: string]: JSONValue }
+import type { JSONValue } from './index'
 
-export class Http {
+export default class Http {
   instance: AxiosInstance
 
   constructor(baseURL: string) {
@@ -46,5 +46,3 @@ export class Http {
     })
   }
 }
-
-export const http = new Http('/api/v1')
