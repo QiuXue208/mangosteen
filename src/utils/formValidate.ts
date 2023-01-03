@@ -1,5 +1,7 @@
+import { JSONValue } from "../service/index"
+
 type FData = {
-  [k: string]: undefined | null | string | number | FData
+  [k: string]: JSONValue
 }
 
 type Rule<T> = {
