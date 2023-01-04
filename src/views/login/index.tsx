@@ -27,7 +27,6 @@ export const Login = defineComponent({
 
     const handleSendValidationCode = async() => {
       on()
-      console.log(isValid({ email: formData.email }))
       if (!isValid({ email: formData.email })) return
       refValidationCode.value.startCountDown()
       await sendvalidationCode({ email: formData.email })

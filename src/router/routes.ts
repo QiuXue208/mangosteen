@@ -29,6 +29,9 @@ const appPage: RouteRecordRaw[] = [
   {
     path: '/welcome',
     component: Welcome,
+    beforeEnter: (to, from, next) => {
+      localStorage.getItem('skipFeatures') === 'yes' ? next('/start') : next()
+    },
     children: [
       {
         path: 'first',
