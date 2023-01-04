@@ -9,6 +9,7 @@ import s from './index.module.scss'
 import { login, sendvalidationCode } from "../../service/modules/login";
 import { useBool } from "../../hooks/useBool";
 import { useRoute, useRouter } from "vue-router";
+import { refreshMe } from "../../utils/mePromise";
 
 export const Login = defineComponent({
   setup() {
@@ -52,6 +53,7 @@ export const Login = defineComponent({
       })
       localStorage.setItem('jwt', response.data.jwt)
       const redirectTo = route.query.redirectTo as string
+      refreshMe()
       router.push(redirectTo || '/')
     }
 

@@ -63,7 +63,7 @@ const appPage: RouteRecordRaw[] = [
     path: '/item',
     children: [
       {
-        path: 'index',
+        path: '',
         component: ItemsList
       },
       {
