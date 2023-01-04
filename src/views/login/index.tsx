@@ -6,11 +6,14 @@ import { MainLayout } from "../../components/Layout/MainLayout";
 import { formValidate } from "../../utils/formValidate";
 import type { Rules, FData } from '../../utils/formValidate'
 import s from './index.module.scss'
-import { sendvalidationCode } from "../../service/modules/login";
+import { login, sendvalidationCode } from "../../service/modules/login";
 import { useBool } from "../../hooks/useBool";
+import { useRoute, useRouter } from "vue-router";
 
 export const Login = defineComponent({
   setup() {
+    const router = useRouter()
+    const route = useRoute()
     const formData = reactive<FData>({ email: '', code: '' })
     const errors = ref<{[k in keyof typeof formData]?: string[]}>({})
     const refValidationCode = ref()
@@ -24,6 +27,7 @@ export const Login = defineComponent({
 
     const handleSendValidationCode = async() => {
       on()
+      console.log(isValid({ email: formData.email }))
       if (!isValid({ email: formData.email })) return
       refValidationCode.value.startCountDown()
       await sendvalidationCode({ email: formData.email })
@@ -40,14 +44,32 @@ export const Login = defineComponent({
       }
     }
 
-    const hanldeSubmit = () => {
+    const hanldeSubmit = async () => {
       if (!isValid(formData)) return
+      const response = await login(formData).catch(error => {
+        handleError(error)
+        // 调用失败
+        throw error
+      })
+      localStorage.setItem('jwt', response.data.jwt)
+      const redirectTo = route.query.redirectTo as string
+      router.push(redirectTo || '/')
     }
 
-    const isValid = (data: FData) => {
+    const isValid = (data: FData, validateSingleField = false) => {
       const _errors = formValidate(data, rules)
       Object.assign(errors.value, _errors)
-      if (Object.keys(_errors).length) return false
+      if (Object.keys(_errors).length) {
+        Object.keys(errors.value).map(key => {
+          if (_errors[key]) {
+            errors.value[key] = _errors[key]
+          } else {
+            delete errors.value[key]
+          }
+        })
+        return false
+      }
+      errors.value = {}
       return true
     }
 
